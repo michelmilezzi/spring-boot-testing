@@ -1,8 +1,6 @@
-package br.com.michelmilezzi.DemoApp.model;
+package br.com.michelmilezzi.DemoApp.domain;
 
 
-import br.com.michelmilezzi.DemoApp.domain.Invoice;
-import br.com.michelmilezzi.DemoApp.domain.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

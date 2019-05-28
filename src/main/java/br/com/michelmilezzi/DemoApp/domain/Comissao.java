@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 
 public class Comissao {
 
-    public static final int BONUS = 1000;
-    public static final int VALOR_ELEGIVEL_PARA_BONUS = 30000;
+    private static final BigDecimal VALOR_DE_VENDAS_ELEGIVEL_PARA_BONUS = BigDecimal.valueOf(30000);
+    private static final BigDecimal VALOR_DE_BONUS = BigDecimal.valueOf(1000);
+
     private Vendedor vendedor;
     private BigDecimal valorTotalDeVendas;
 
@@ -14,12 +15,22 @@ public class Comissao {
         this.valorTotalDeVendas = valorTotalDeVendas;
     }
 
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public BigDecimal getValorTotalDeVendas() {
+        return valorTotalDeVendas;
+    }
+
     public BigDecimal getValorDeComissao() {
-        BigDecimal comissao = this.vendedor.getSalario()
+
+        BigDecimal comissao = getVendedor()
+                .getSalario()
                 .multiply(getPercentualDeComissao());
 
-        if (valorTotalDeVendas.compareTo(BigDecimal.valueOf(VALOR_ELEGIVEL_PARA_BONUS)) > 0) {
-            comissao.add(BigDecimal.valueOf(BONUS));
+        if (getValorTotalDeVendas().compareTo(VALOR_DE_VENDAS_ELEGIVEL_PARA_BONUS) > 0) {
+            return comissao.add(VALOR_DE_BONUS);
         }
 
         return comissao;
@@ -27,24 +38,23 @@ public class Comissao {
 
     public BigDecimal getPercentualDeComissao() {
 
-        if (valorTotalDeVendas.compareTo(BigDecimal.valueOf(5000)) <= 0) {
+        if (this.valorTotalDeVendas.compareTo(BigDecimal.valueOf(5000)) < 0) {
             return BigDecimal.ZERO;
         }
 
-        if (valorTotalDeVendas.compareTo(BigDecimal.valueOf(10000)) <= 0) {
-            return BigDecimal.valueOf(0.02D);
+        if (this.valorTotalDeVendas.compareTo(BigDecimal.valueOf(10000)) <= 0) {
+            return BigDecimal.valueOf(0.02);
         }
 
-        if (valorTotalDeVendas.compareTo(BigDecimal.valueOf(20000)) <= 0) {
-            return BigDecimal.valueOf(0.025D);
+        if (this.valorTotalDeVendas.compareTo(BigDecimal.valueOf(20000)) <= 0) {
+            return BigDecimal.valueOf(0.025);
         }
 
-        if (valorTotalDeVendas.compareTo(BigDecimal.valueOf(30000)) <= 0) {
-            return BigDecimal.valueOf(0.03D);
+        if (this.valorTotalDeVendas.compareTo(BigDecimal.valueOf(30000)) <= 0) {
+            return BigDecimal.valueOf(0.03);
         }
 
-        return BigDecimal.valueOf(0.05D);
-
+        return BigDecimal.valueOf(0.05);
     }
 
 }
