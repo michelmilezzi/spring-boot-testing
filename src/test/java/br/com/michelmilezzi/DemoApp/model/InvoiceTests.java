@@ -20,11 +20,13 @@ public class InvoiceTests {
     @Test
     public void calculaTotalTests() {
         Invoice invoice = new Invoice(LocalDateTime.now());
+
         invoice.addItem(new Product("Product1"), 5L, BigDecimal.ONE);
         invoice.addItem(new Product("Product2"), 10L, BigDecimal.ONE);
         invoice.addItem(new Product("Product3"), 15L, BigDecimal.ONE);
 
-        assertThat(invoice.getTotal()).isEqualByComparingTo(BigDecimal.valueOf(30));
+        assertThat(invoice.getTotal())
+                .isEqualByComparingTo(BigDecimal.valueOf(30));
     }
 
 }
